@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://react-popper-spring-tooltip.netlify.com">
-    <img src="assets/demo.gif" width="512" height="auto"/>
+    <img src="https://i.imgur.com/4WKRj4b.gif" width="512" height="auto"/>
   </a>
 </p>
 
