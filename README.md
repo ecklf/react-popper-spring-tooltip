@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/react-popper-spring-tooltip.svg)](https://www.npmjs.com/package/react-popper-spring-tooltip)
 [![npm downloads](https://img.shields.io/npm/dm/react-popper-spring-tooltip.svg)](https://www.npmjs.com/package/react-popper-spring-tooltip)
-[![Dependency Status](https://david-dm.org/souporserious/react-popper-spring-tooltip.svg)](https://david-dm.org/souporserious/react-popper-spring-tooltip)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 > Tooltips powered by [react-popper](https://github.com/FezVrasta/react-popper) and [react-spring](https://www.react-spring.io/).
