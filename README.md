@@ -6,9 +6,7 @@
 
 > Tooltips powered by [react-popper](https://github.com/FezVrasta/react-popper) and [react-spring](https://www.react-spring.io/).
 
-## Demo
-
-**Click on the image below 🔽**
+## [Demo](https://react-popper-spring-tooltip.netlify.com)
 
 <p align="center">
   <a href="https://react-popper-spring-tooltip.netlify.com">
