@@ -10,11 +10,11 @@
 
 **Click on the image below 🔽**
 
-<div style="text-align: center">
+<p align="center">
   <a href="https://react-popper-spring-tooltip.netlify.com">
     <img src="assets/demo.gif" width="256" height="auto"/>
   </a>
-</div>
+</p>
 
 ## Install
 
