@@ -1,6 +1,6 @@
 {
   "name": "react-popper-spring-tooltip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A highly configurable wrapper around react-popper and react-spring",
   "author": "impulse",
   "license": "MIT",
