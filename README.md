@@ -30,20 +30,20 @@ yarn add react-popper-spring-tooltip
 
 Let's start with a simple example:
 
-Wrap your `Tooltip` component around on / off `Trigger`.
+Wrap your `Tooltip` component around on / off Toggle.
 
 ```jsx
 <Tooltip trigger="click" placement="bottom" content={<h1>Hi!</h1>}>
-  {({ ...bind }) => <button {...bind}>Trigger</button>}
+  {({ ...bind }) => <button {...bind}>Toggle</button>}
 </Tooltip>
 ```
 
 Spreading `bind` will pass you the reference provided by `react-popper` and _EventListeners_ to open / close the tooltip content.
 
-`react-popper-spring-tooltip` makes use of a React pattern called **"render prop"**, if you are not
-familiar with it, please read more [on the official React documentation](https://reactjs.org/docs/render-props.html).
+> `react-popper-spring-tooltip` makes use of a React pattern called **"render prop"**, if you are not
+> familiar with it, please read more [on the official React documentation](https://reactjs.org/docs/render-props.html).
 
-In more advanced use cases you may pass your own React Components via the `content` prop. You can also pass your custom `react-spring` config to make awesome custom animations.
+In more advanced use cases you may pass your own React Components via the `content` prop. You can also pass your custom `react-spring` config to make awesome custom animations. Also not that you can destructure the `isOpen` prop to add conditions to your Toggle.
 
 ```jsx
 <Tooltip
@@ -56,7 +56,7 @@ In more advanced use cases you may pass your own React Components via the `conte
       config: { duration: 100 }
     },
     to: {
-      scale: 1,
+      scale: 1,jj
       config: { duration: 50 }
     }
   }}
@@ -66,7 +66,7 @@ In more advanced use cases you may pass your own React Components via the `conte
       {...bind}
       className={`${isOpen ? "opened-button" : "closed-button"}`}
     >
-      Trigger
+      Toggle
     </button>
   )}
 </Tooltip>
@@ -78,7 +78,7 @@ In more advanced use cases you may pass your own React Components via the `conte
 
 > `(props) => ReactNode` | _required_
 
-The `Tooltip` component must be wrapped around function that renders the _Trigger_.
+The `Tooltip` component must be wrapped around a function that renders your Toggle.
 
 #### content
 
@@ -86,21 +86,11 @@ The `Tooltip` component must be wrapped around function that renders the _Trigge
 
 The content of the Tooltip.
 
-#### trigger
-
-> `string` | _required_
-
-The tooltip trigger action. Valid triggers actions are:
-
-- `click`
-- `hover`
-- `context`
-
 #### placement
 
 > `string` | _required_
 
-The tooltip placement. Valid placements are:
+The Tooltip placement. Valid placements are:
 
 - `auto`
 - `top`
@@ -113,11 +103,27 @@ Each placement can have a variation from this list:
 - `-start`
 - `-end`
 
+#### trigger
+
+> `string` | _required_
+
+The Tooltip trigger action. Valid actions are:
+
+- `click`
+- `hover`
+- `context`
+
+#### closeOnClickOutside
+
+> `boolean` | defaults to `true`
+
+Will determine whether or not to close the Tooltip by clicking outside the Trigger.
+
 #### init
 
 > `boolean` | defaults to `false`
 
-Will determine the initial open (true) and closed (false) state.
+Will set the initial open (true) and closed (false) state.
 
 #### springConfig
 
@@ -133,7 +139,7 @@ If you are new to `react-spring` check out their [docs](https://www.react-spring
 
 ## TypeScript
 
-This library is built with TypeScript and will automatically generate typing in: `dist/Tooltip.d.ts`
+This library is built with TypeScript and will automatically generate typing during the Rollup build process in: `dist/Tooltip.d.ts`
 
 ## Local Development
 
