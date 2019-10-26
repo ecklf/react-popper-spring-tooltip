@@ -5,6 +5,7 @@ import { Manager, Reference, Popper, RefHandler } from "react-popper";
 interface TooltipProps {
   init?: boolean;
   springConfig?: { from: { [key: string]: any }; to: { [key: string]: any } };
+  closeOnClickOutside?: boolean;
   content: string | ReactElement;
   children: (props: RenderProps) => ReactNode;
   trigger: "click" | "hover" | "context";
@@ -25,9 +26,12 @@ interface TooltipProps {
 }
 
 interface TriggerEvents {
-  click: { onClick: () => void };
+  click: { onClick: () => void; onBlur: (e: MouseEvent) => void };
   hover: { onMouseEnter: () => void; onMouseLeave: () => void };
-  context: { onContextMenu: (e: MouseEvent) => void };
+  context: {
+    onContextMenu: (e: MouseEvent) => void;
+    onBlur: (e: MouseEvent) => void;
+  };
 }
 
 interface RenderProps {
@@ -41,6 +45,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     from: { opacity: 0, config: config.stiff },
     to: { opacity: 1, config: config.stiff }
   },
+  closeOnClickOutside = true,
   content,
   children,
   trigger,
@@ -51,7 +56,10 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   const triggerEvents: TriggerEvents = {
     click: {
-      onClick: () => setIsOpen(prev => !prev)
+      onClick: () => setIsOpen(prev => !prev),
+      onBlur: () => {
+        closeOnClickOutside && setIsOpen(false);
+      }
     },
     hover: {
       onMouseEnter: () => setIsOpen(true),
@@ -61,6 +69,9 @@ const Tooltip: React.FC<TooltipProps> = ({
       onContextMenu: e => {
         e.preventDefault();
         setIsOpen(prev => !prev);
+      },
+      onBlur: () => {
+        closeOnClickOutside && setIsOpen(false);
       }
     }
   };
