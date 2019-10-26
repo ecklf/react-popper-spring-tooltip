@@ -30,7 +30,7 @@ yarn add react-popper-spring-tooltip
 
 Let's start with a simple example:
 
-Wrap your `Tooltip` component around on / off Toggle.
+Wrap your `Tooltip` component around an on / off Toggle.
 
 ```jsx
 <Tooltip trigger="click" placement="bottom" content={<h1>Hi!</h1>}>
@@ -43,7 +43,7 @@ Spreading `bind` will pass you the reference provided by `react-popper` and _Eve
 > `react-popper-spring-tooltip` makes use of a React pattern called **"render prop"**, if you are not
 > familiar with it, please read more [on the official React documentation](https://reactjs.org/docs/render-props.html).
 
-In more advanced use cases you may pass your own React Components via the `content` prop. You can also pass your custom `react-spring` config to make awesome custom animations. Also not that you can destructure the `isOpen` prop to add conditions to your Toggle.
+In more advanced use cases you may pass your Components via the `content` prop. You can also pass your own `react-spring` config to make awesome custom animations. Also note that you can destructure the `isOpen` prop to add conditions to your Toggle.
 
 ```jsx
 <Tooltip
@@ -130,7 +130,7 @@ Will set the initial open (true) and closed (false) state.
 > `object` | defaults to:
 
 ```js
-{ from: {opacity : 0}, to: {opacity: 1}}
+{ from: { opacity: 0 }, to: { opacity: 1 }}
 ```
 
 Define the CSS using `from` and `to` keys.
