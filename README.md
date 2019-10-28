@@ -56,7 +56,7 @@ In more advanced use cases you may pass your Components via the `content` prop. 
       config: { duration: 100 }
     },
     to: {
-      scale: 1,jj
+      scale: 1,
       config: { duration: 50 }
     }
   }}
