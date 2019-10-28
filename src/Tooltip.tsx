@@ -1,4 +1,10 @@
-import React, { useState, ReactNode, ReactElement } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  ReactNode,
+  ReactElement
+} from "react";
 import { useSpring, animated, config } from "react-spring";
 import { Manager, Reference, Popper, RefHandler } from "react-popper";
 
@@ -26,11 +32,10 @@ interface TooltipProps {
 }
 
 interface TriggerEvents {
-  click: { onClick: () => void; onBlur: (e: MouseEvent) => void };
+  click: { onClick: () => void };
   hover: { onMouseEnter: () => void; onMouseLeave: () => void };
   context: {
     onContextMenu: (e: MouseEvent) => void;
-    onBlur: (e: MouseEvent) => void;
   };
 }
 
@@ -52,14 +57,41 @@ const Tooltip: React.FC<TooltipProps> = ({
   placement,
   ...props
 }) => {
+  const childRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(init);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent): void => {
+      if (e.key === "Esc" || e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!closeOnClickOutside) return;
+    const handleClickOutside = (e: MouseEvent): void => {
+      if (
+        childRef &&
+        childRef.current &&
+        !childRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const triggerEvents: TriggerEvents = {
     click: {
-      onClick: () => setIsOpen(prev => !prev),
-      onBlur: () => {
-        closeOnClickOutside && setIsOpen(false);
-      }
+      onClick: () => setIsOpen(prev => !prev)
     },
     hover: {
       onMouseEnter: () => setIsOpen(true),
@@ -69,9 +101,6 @@ const Tooltip: React.FC<TooltipProps> = ({
       onContextMenu: e => {
         e.preventDefault();
         setIsOpen(prev => !prev);
-      },
-      onBlur: () => {
-        closeOnClickOutside && setIsOpen(false);
       }
     }
   };
@@ -82,9 +111,9 @@ const Tooltip: React.FC<TooltipProps> = ({
     <Manager>
       <Reference>
         {({ ref }) => (
-          <React.Fragment>
+          <div ref={childRef}>
             {children({ ref, isOpen, ...triggerEvents[trigger] })}
-          </React.Fragment>
+          </div>
         )}
       </Reference>
       <Popper placement={placement}>
